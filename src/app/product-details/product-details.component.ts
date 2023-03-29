@@ -7,7 +7,7 @@ import { Product, products } from '../products';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;
   constructor(private route: ActivatedRoute) { }
   ngOnInit() {
@@ -16,6 +16,13 @@ export class ProductDetailsComponent {
     const productIdFromRoute = Number(routeParams.get('productId'));
   
     // Find the product that correspond with the id provided in route.
-    this.product = products.find(product => product.id === productIdFromRoute);
+    //this.product = products.find(product => product.id === productIdFromRoute);
+    for (let i = 0; i < products.length; i++) {
+      let pr = products[i] ;
+      if (pr.id === productIdFromRoute){
+        this.product = pr;
+        break;
+      }
+    }
   }
 }
